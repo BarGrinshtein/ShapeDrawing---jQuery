@@ -1,6 +1,9 @@
+:root{
+    --border-bottom:60px solid black;
+}
+
 body,html{
-    height: 100%;
-    padding: 0;
+    height: 95%;
 }
 
 .lineBreak{
@@ -13,12 +16,71 @@ body,html{
     padding: 8px;
 }
 
-#canvas{
-    width: 99%;
-    height: 85%;
+#drawBoard{
+    height: 90%;
     border: black;
     background-color: burlywood;
     padding: 8px;
+}
+
+.circle{
+    position: absolute;
+    border-radius: 50%;
+}
+
+.rect{
+    position: absolute;
+}
+
+.triangle{
+    position: absolute;
+    height: 0;
+    width: 0;
+    border-right: 60px solid transparent;
+    border-left: 60px solid transparent;
+}
+
+.bigShape{
+    width: 80px;
+    height: 90px;
+}
+
+.regularShape{
+    width: 50px;
+    height: 60px;
+}
+
+.smallShape{
+    width: 40px;
+    height: 40px;
+}
+
+.green{
+    background-color:green;
+}
+
+.red{
+    background-color:red;
+}
+
+.yellow{
+    background-color:yellow;
+}
+
+.blue{
+    background-color:blue;
+}
+
+.brown{
+    background-color:brown;
+}
+
+.white{
+    background-color:white;
+}
+
+.pink{
+    background-color: pink;
 }
 
 .selected{
@@ -26,15 +88,29 @@ body,html{
 }
 
 .tri-selected{
-    stroke: black;
-    stroke-width: 3px;
+
 }
+
+.tri-selected::before{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 55px solid transparent;
+    border-right: 55px solid transparent;
+    border-bottom:var(--border-bottom);
+    left: -55px;
+    top: 2px;
+}
+
 
 .rotational{
     -webkit-animation:spin 4s linear infinite;
     -moz-animation:spin 4s linear infinite;
     animation:spin 4s linear infinite;
 }
+
+
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
