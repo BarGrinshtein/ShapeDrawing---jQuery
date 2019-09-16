@@ -122,11 +122,6 @@ class Js_create_shape {
             return Math.random() * (+($drawBoard.width() - width) - +$drawBoard.position().left) + +$drawBoard.position().left;
         }
 
-        function drawMiniTriangle(selector) {
-            //root.style.setProperty('--border-bottom',(selector.attr('height')-5)+'px '+ 'solid '+ selector.attr('myColor'));
-           //selector.css('border-bottom',(selector.attr('height'))+'px solid black');
-        }
-
         createShape(container);
     }
 }
