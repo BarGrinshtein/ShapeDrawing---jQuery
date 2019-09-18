@@ -1,24 +1,43 @@
-class Js_delete_shape {
-    constructor(_container,_rotateBtn,_deleteBtn){
-        this.container = _container;
-        this.rotateBtn = _rotateBtn;
-        this.deleteBtn = _deleteBtn;
+
+var Js_delete_shape = (function () {
+    var containers , rotateBtb , deleteBtn , observers = [];
+    
+    function Js_delete_shape(_containers,_rotateBtn,_deleteBtn) {
+        containers = _containers;
+        rotateBtb = _rotateBtn;
+        deleteBtn = _deleteBtn;
     }
 
-    deleteShape(){
-        function deleteDrawable(container,rotateBtn,deleteBtn) {
-            const  $drawBoard = $(container);
-            const $rBtn = $(rotateBtn);
-            const $dBtn = $(deleteBtn);
-            $drawBoard.children('div').each(function () {
+    deleteDrawable = function(){
+        const $rBtn = $(rotateBtb);
+        const $dBtn = $(deleteBtn);
+
+        for (var i of containers){
+            $(i).children('div').each(function () {
                 if($(this).hasClass('selected') ||$(this).hasClass('tri-selected')) {
                     $(this).remove();
+                    notifyObservers();
                     hasSelected = false;
-                    $dBtn.prop('disabled',true);
-                    $rBtn.prop('disabled',true);
                 }
             })
         }
-        deleteDrawable(this.container,this.deleteBtn,this.rotateBtn);
-    }
-}
+        $dBtn.prop('disabled',true);
+        $rBtn.prop('disabled',true);
+    };
+
+    notifyObservers = function(){
+        for(let o of observers)
+            o.update();
+    };
+
+    Js_delete_shape.prototype.addObserver = function(o){
+        observers.push(o);
+    };
+
+    Js_delete_shape.prototype.deleteShape = function () {
+        deleteDrawable();
+    };
+
+    return Js_delete_shape;
+})();
+

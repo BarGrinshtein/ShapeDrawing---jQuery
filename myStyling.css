@@ -1,116 +1,126 @@
-:root{
-    --border-bottom:60px solid black;
-}
+body, html {
+  height: 95%; }
 
-body,html{
-    height: 95%;
-}
+.lineBreak {
+  background-color: white;
+  margin: 5px; }
 
-.lineBreak{
-    background-color: white;
-    margin: 5px;
-}
+.header {
+  background-color: burlywood;
+  padding: 8px; }
 
-.header{
-    background-color: burlywood;
-    padding: 8px;
-}
-
-#drawBoard{
-    height: 90%;
-    border: black;
-    background-color: burlywood;
-    padding: 8px;
-}
-
-.circle{
+.boardContainer {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-color: white; }
+  .boardContainer .my-row {
     position: absolute;
-    border-radius: 50%;
-}
+    height: 100%;
+    width: 100%; }
+    .boardContainer .my-row .board {
+      position: relative;
+      height: 100%;
+      background-color: burlywood;
+      border: 2px solid white; }
 
-.rect{
-    position: absolute;
-}
+.circle {
+  border-radius: 50%;
+  position: absolute; }
 
-.triangle{
-    position: absolute;
-    height: 0;
-    width: 0;
-    border-right: 60px solid transparent;
-    border-left: 60px solid transparent;
-}
+.rect {
+  position: absolute; }
 
-.bigShape{
-    width: 80px;
-    height: 90px;
-}
+.triangle {
+  position: absolute;
+  height: 0;
+  width: 0;
+  border-right: 60px solid transparent;
+  border-left: 60px solid transparent; }
 
-.regularShape{
-    width: 50px;
-    height: 60px;
-}
+.bigShape {
+  width: 80px;
+  height: 90px; }
 
-.smallShape{
-    width: 40px;
-    height: 40px;
-}
+.regularShape {
+  width: 50px;
+  height: 60px; }
 
-.green{
-    background-color:green;
-}
+.smallShape {
+  width: 40px;
+  height: 40px; }
 
-.red{
-    background-color:red;
-}
+.green {
+  background-color: green; }
 
-.yellow{
-    background-color:yellow;
-}
+.red {
+  background-color: red; }
 
-.blue{
-    background-color:blue;
-}
+.yellow {
+  background-color: yellow; }
 
-.brown{
-    background-color:brown;
-}
+.blue {
+  background-color: blue; }
 
-.white{
-    background-color:white;
-}
+.brown {
+  background-color: brown; }
 
-.pink{
-    background-color: pink;
-}
+.white {
+  background-color: white; }
 
-.selected{
-    border: 3px solid black;
-}
+.pink {
+  background-color: pink; }
 
-.tri-selected{
+.selected {
+  border: 3px solid black; }
 
-}
+.tri-selected-big::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 55px solid transparent;
+  border-right: 55px solid transparent;
+  border-bottom: 75px solid black;
+  left: -55px;
+  top: 2px; }
 
-.tri-selected::before{
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-left: 55px solid transparent;
-    border-right: 55px solid transparent;
-    border-bottom:var(--border-bottom);
-    left: -55px;
-    top: 2px;
-}
+.tri-selected-medium::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 55px solid transparent;
+  border-right: 55px solid transparent;
+  border-bottom: 55px solid black;
+  left: -55px;
+  top: 3px; }
 
+.tri-selected-small::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 55px solid transparent;
+  border-right: 55px solid transparent;
+  border-bottom: 35px solid black;
+  left: -55px;
+  top: 3px; }
 
-.rotational{
-    -webkit-animation:spin 4s linear infinite;
-    -moz-animation:spin 4s linear infinite;
-    animation:spin 4s linear infinite;
-}
+.rotational {
+  -webkit-animation: spin 4s linear infinite;
+  -moz-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite; }
 
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg); } }
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
 
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+/*# sourceMappingURL=myStyling.css.map */

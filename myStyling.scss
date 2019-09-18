@@ -3,9 +3,6 @@ $bgColors:(
 blueColor:blue,redColor:red,greenColor:green,whiteColor:white,brownColor:brown,pinkColor:pink
 );
 
-:root{
-  --border-bottom:60px solid black;
-}
 
 body,html{
   height: 95%;
@@ -21,16 +18,29 @@ body,html{
   padding: 8px;
 }
 
-#drawBoard{
-  height: 90%;
-  border: black;
-  background-color: burlywood;
-  padding: 8px;
+.boardContainer{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+
+  .my-row{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    .board{
+      position: relative;
+      height: 100%;
+      background-color: burlywood;
+      border: 2px solid white;
+    }
+  }
 }
 
 .circle{
-  position: absolute;
   border-radius: 50%;
+  position: absolute;
 }
 
 .rect{
