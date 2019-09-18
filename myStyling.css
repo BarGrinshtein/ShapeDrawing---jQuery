@@ -23,6 +23,9 @@ body, html {
       height: 100%;
       background-color: burlywood;
       border: 2px solid white; }
+      @media (max-width: 766px) {
+        .boardContainer .my-row .board {
+          height: 33%; } }
 
 .circle {
   border-radius: 50%;

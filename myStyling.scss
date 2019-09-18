@@ -3,6 +3,13 @@ $bgColors:(
 blueColor:blue,redColor:red,greenColor:green,whiteColor:white,brownColor:brown,pinkColor:pink
 );
 
+$mobile: 766px;
+
+@mixin mobile{
+  @media (max-width: $mobile){
+    @content;
+  }
+}
 
 body,html{
   height: 95%;
@@ -34,6 +41,10 @@ body,html{
       height: 100%;
       background-color: burlywood;
       border: 2px solid white;
+
+      @include mobile{
+        height: 33%;
+      }
     }
   }
 }
