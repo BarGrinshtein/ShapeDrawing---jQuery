@@ -1,70 +1,81 @@
 let hasSelected = false;
 
-class Js_create_shape {
-    constructor(_container) {
-        this.ColorsEnum = ["red","green","yellow","blue","brown","white","pink"];
-        this.SizeEnum = ["bigShape","regularShape","smallShape"];
-        this.container = _container;
+var JS_create_shape = (function () {
+    var ColorEnum , SizeEnum , triangleBoard, circleBoard, rectBoard ;
+
+    function JS_create_shape (_triangleBoard,_circleBoard,_rectBoard) {
+        ColorEnum = ["red","green","yellow","blue","brown","white","pink"];
+        SizeEnum = ["bigShape","regularShape","smallShape"];
+        triangleBoard =_triangleBoard;
+        circleBoard = _circleBoard;
+        rectBoard = _rectBoard;
     }
 
-    createRandomShape() {
+    createShape = function() {
 
-        function createShape(container,colorEnum,sizeEnum) {
-            const $board = $(container);
+        const checkedShapes = checkBoxStatus();
 
-            let method = Math.floor(Math.random() * (+4 - +1)) + +1;
-            let size = Math.floor(Math.random() * (+3 - +0)) + +0;
+
+        //creation loop for all the boards that were selected
+        for(let i = 0; i<checkedShapes.length ;i++) {
+
+            const $board = $(checkedShapes[i].getContainer());
+            let $shape = $('<div>');
+
+
+            let size = Math.floor(Math.random() * SizeEnum.length);
+            let color = Math.floor(Math.random() * ColorEnum.length);
 
             let height;
             let triClass;
 
-            if(size === 0) {
+            if (size === 0) {
                 height = 80;
                 triClass = "tri-selected-big";
-            }
-            else if(size ===1) {
+            } else if (size === 1) {
                 height = 60;
                 triClass = "tri-selected-medium";
-            }
-            else if(size === 2) {
+            } else if (size === 2) {
                 height = 40;
                 triClass = "tri-selected-small";
             }
 
 
-            let color = Math.floor(Math.random() * (+7 - +0)) + +0;
-
-            let $shape = $('<div>');
-
-
-            if(method === 1 || method === 2){
-                $shape.addClass(sizeEnum[size]);
-                $shape.addClass(colorEnum[color]);
-                if(method === 1)
+            if (checkedShapes[i].getType() === "circle" || checkedShapes[i].getType() === "rectangle") {
+                $shape.addClass(SizeEnum[size]);
+                $shape.addClass(ColorEnum[color]);
+                if (checkedShapes[i].getType() === "circle")
                     $shape.addClass('circle');
                 else
                     $shape.addClass('rect');
             }
-            else if(method === 3){
+            else if (checkedShapes[i].getType() === "triangle") {
                 $shape.addClass('triangle');
-                $shape.css('border-bottom', height + "px solid " + colorEnum[color]);
+                $shape.css('border-bottom', height + "px solid " + ColorEnum[color]);
                 $shape.attr('height', height);
-                $shape.attr("size",triClass);
+                $shape.attr("size", triClass);
             }
 
-            $shape.attr('myColor', colorEnum[color]);
+            $shape.attr('myColor', ColorEnum[color]);
 
             let x, y;
 
-            if (size === 0) {
-                x = getRandomLeft(110);
-                y = getRandomTop(110);
-            } else if (size === 1) {
-                x = getRandomLeft(80);
-                y = getRandomTop(80);
-            } else if (size === 2) {
-                x = getRandomLeft(70);
-                y = getRandomTop(60);
+            if(checkedShapes[i].getType() === "triangle"){
+                x = getRandomLeft(115,$board);
+                y = getRandomTop(90,$board);
+            }
+
+            else {
+                if (size === 0) {
+                    x = getRandomLeft(70, $board);
+                    y = getRandomTop(90, $board);
+                } else if (size === 1) {
+                    x = getRandomLeft(60, $board);
+                    y = getRandomTop(70, $board);
+                } else if (size === 2) {
+                    x = getRandomLeft(40, $board);
+                    y = getRandomTop(50, $board);
+                }
             }
 
             $shape.css('top', y);
@@ -72,7 +83,7 @@ class Js_create_shape {
 
             /** onClick event for each new shape */
             $shape.on('click', function () {
-                if ($shape.hasClass('selected') || $shape.hasClass($shape.attr('size')) ) {
+                if ($shape.hasClass('selected') || $shape.hasClass($shape.attr('size'))) {
                     $shape.removeClass('selected');
                     if ($shape.hasClass('triangle')) {
                         $shape.children('div').each(function () {
@@ -90,8 +101,7 @@ class Js_create_shape {
                         if ($shape.hasClass('triangle')) {
                             $shape.addClass($shape.attr('size'));
                             $shape.addClass('tri-selected');
-                        }
-                        else {
+                        } else {
                             $shape.addClass('selected');
                         }
                         $('#deleteBtn').prop('disabled', false);
@@ -101,20 +111,45 @@ class Js_create_shape {
                 }
             });
             $board.append($shape);
-            console.log($board);
         }
+    };
 
-        function getRandomTop(height) {
-            const $drawBoard = $('#drawBoard');
-            return Math.random() * (+(($drawBoard.position().top + $drawBoard.outerHeight(true)) - height) - +$drawBoard.position().top) + +$drawBoard.position().top;
-        }
+    checkBoxStatus = function() {
+        let checked = [];
+        const $triCheck = $('#tri-checkbox');
+        const $circleCheck = $('#circle-checkbox');
+        const $rectCheck = $('#rect-checkbox');
 
-        function getRandomLeft(width) {
-            const $drawBoard = $('#drawBoard');
-            return Math.random() * (+($drawBoard.width() - width) - +$drawBoard.position().left) + +$drawBoard.position().left;
-        }
+        if($triCheck.is(":checked") === true)
+            checked.push(new ElementItem($('#triangleBoard'),'triangle'));
+        if($circleCheck.is(":checked") === true)
+            checked.push(new ElementItem($('#circleBoard'),'circle'));
+        if($rectCheck.is(":checked") === true)
+            checked.push(new ElementItem($('#rectBoard'),'rectangle'));
 
-        createShape(this.container,this.ColorsEnum,this.SizeEnum);
-    }
-}
+        console.log(checked);
 
+        for(let i = 0 ; i<checked.length ; i++)
+            console.log(checked[i].getType());
+        return checked;
+    };
+
+    getRandomTop = function(height,board) {
+        const $drawBoard = $(board);
+        console.log($drawBoard.position().top + "  height =  " + height);
+        return Math.random() * (+((0 + $drawBoard.outerHeight(true)) - height) - +0) + +0;
+    };
+
+    getRandomLeft = function(width,board) {
+        const $drawBoard = $(board);
+        let max = $drawBoard.position().left + $drawBoard.width() - width;
+        console.log($drawBoard.position().left +  " board.width() = " + $drawBoard.width() + "   width = " + width + " max = " + max);
+        return Math.random() * (+($drawBoard.width() - width) - +0) + +0;
+    };
+
+    JS_create_shape.prototype.createRandomShape = function () {
+        createShape();
+    };
+
+    return JS_create_shape;
+})();
