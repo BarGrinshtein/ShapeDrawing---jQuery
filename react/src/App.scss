@@ -1,27 +1,175 @@
+
 .App {
-  text-align: center;
+  height: 100%;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+html{
+  height: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+body{
+  height: 90%;
 }
 
-.App-link {
-  color: #61dafb;
+#root{
+  height: 100%;
 }
+
+.pageHeader{
+  background-color: burlywood;
+  padding: 8px;
+  margin: 5px 3px 5px 3px;
+}
+
+.boardContainer {
+  position: absolute;
+  height: 90%;
+  width: 100%;
+  background-color: white;
+}
+
+.my-row {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.board {
+      position: relative;
+      height: 100%;
+      background-color: burlywood;
+      border: 2px solid white;
+}
+
+
+.circle{
+  border-radius: 50%;
+  position: absolute;
+}
+
+.rect{
+  position: absolute;
+}
+
+.triangle{
+  position: absolute;
+  height: 0;
+  width: 0;
+  border-right: 60px solid transparent;
+  border-left: 60px solid transparent;
+}
+
+
+.bigShape{
+  width: 80px;
+  height: 90px;
+}
+
+.regularShape{
+  width: 50px;
+  height: 60px;
+}
+
+.smallShape{
+  width: 40px;
+  height: 40px;
+}
+
+
+.green{
+  background-color:green;
+}
+
+.red{
+  background-color:red;
+}
+
+.yellow{
+  background-color:yellow;
+}
+
+.blue{
+  background-color:blue;
+}
+
+.brown{
+  background-color:brown;
+}
+
+.white{
+  background-color:white;
+}
+
+.pink{
+  background-color: pink;
+}
+
+.selected{
+  border: 3px solid black;
+}
+
+
+.tri-selected-big{
+
+}
+
+.tri-selected-big::before{
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 55px solid transparent;
+  border-right: 55px solid transparent;
+  border-bottom:75px solid black;
+  left: -55px;
+  top: 2px;
+}
+
+.tri-selected-medium{
+
+}
+
+.tri-selected-medium::before{
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 55px solid transparent;
+  border-right: 55px solid transparent;
+  border-bottom:55px solid black;
+  left: -55px;
+  top: 3px;
+}
+
+.tri-selected-small{
+
+}
+
+.tri-selected-small::before{
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 55px solid transparent;
+  border-right: 55px solid transparent;
+  border-bottom:35px solid black;
+  left: -55px;
+  top: 3px;
+}
+
+.rotational{
+  -webkit-animation:spin 4s linear infinite;
+  -moz-animation:spin 4s linear infinite;
+  animation:spin 4s linear infinite;
+}
+
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+
+
 
 @keyframes App-logo-spin {
   from {
